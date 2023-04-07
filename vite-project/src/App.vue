@@ -20,11 +20,10 @@
         this.recordList.push(recordObj)
         console.log(typeof(this.recordList))
         console.log(this.recordList)
-        
       }
     }
   }
-
+// acvweve
 
 </script>
 
