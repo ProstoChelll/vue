@@ -1,63 +1,72 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { Ref, ref } from "vue";
+import Button from "./Button.vue";
+import Record from "./Record.vue";
 
 interface IRecord {
-  inputValue: string | number;
+  inputValue: string;
   selectValue: string;
 }
 
-let inputValue = "";
-let selectValue = "";
-let recordList: IRecord[] = [];
+const inputValue = ref("");
+const selectValue = ref("6.00");
+const recordList = ref([]) as Ref<IRecord[]>;
 
-for (let i = 0; i <= 22; i++) {
-  recordList.push({ inputValue: i, selectValue: "" });
-}
-console.log(recordList);
-
-function inputСhanges(event: any) {
-  selectValue = event.target.value;
+function setInputValue(event: any) {
+  inputValue.value = event.target.value;
 }
 
-function selectChanges(event: any) {
-  inputValue = event.target.value;
+function setSelectValue(event: any) {
+  selectValue.value = event.target.value;
 }
 
-function addRecordInHtml(inputValue: number | string | undefined, selectValue: string | undefined) {
-  const div = document.querySelector(".recordListHtml");
-  const htmlRecord = document.createElement("div");
-  htmlRecord.innerHTML = `<p>${inputValue}</p><p>${selectValue}</p>`;
-  htmlRecord.classList.add(`record${inputValue}`);
-  div?.append(htmlRecord);
-}
-
-function addRecord() {
-  for (let i = 0; i <= 21; i++) {
-    if (inputValue.slice(0, 2) == recordList[i].inputValue && selectValue != "") {
-      if (inputValue.slice(0, 2) == recordList[i].inputValue && recordList[i].selectValue != "") {
-        recordList[i].selectValue = selectValue;
-        console.log(recordList);
-      } else {
-        recordList[i].selectValue = selectValue;
-        addRecordInHtml(recordList[i].inputValue, recordList[i].selectValue);
-        console.log(321);
-      }
-    }
+function createRecord() {
+  if (inputValue.value !== "") {
+    recordList.value.push({
+      inputValue: inputValue.value,
+      selectValue: selectValue.value,
+    }),
+      (inputValue.value = ""),
+      (selectValue.value = "6.00");
   }
+}
+function deleteRecord(time: string) {
+  recordList.value = recordList.value.filter(
+    (record) => record.selectValue !== time,
+  );
 }
 </script>
 
 <template>
   <div class="body">
-    <div>
-      <select v-model="inputValue" @select="selectChanges" name="" id="">
+    <div class="controller">
+      <select :value="selectValue" @change="(event) => setSelectValue(event)">
         <option v-for="i in 22">{{ i }}.00</option>
       </select>
-      <input v-bind:value="selectValue" @input="(e) => inputСhanges(e)" />
-      <button @click="addRecord">add record</button>
+      <input :value="inputValue" @input="(e) => setInputValue(e)" />
+      <button @click="createRecord">add record</button>
     </div>
-    <div class="recordListHtml"></div>
+
+    <Record
+      v-for="record in recordList"
+      :key="record.selectValue"
+      :time="record.selectValue"
+      :content="record.inputValue"
+      @delete="deleteRecord(record.selectValue)"
+    >
+    </Record>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.controller {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: auto;
+
+  margin: 10px;
+  padding: 0;
+  gap: 10px;
+}
+</style>
