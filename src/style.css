@@ -1,0 +1,24 @@
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background: #ffd5ff;
+  display: flex;
+  justify-content: center;
+}
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+.top {
+  margin-top: 48px;
+}
+textarea:focus,
+input:focus {
+  outline: none;
+}
