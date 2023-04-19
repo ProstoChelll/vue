@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Ref, ref } from "vue";
-import RecordList from "./recordComponents/RecordList.vue";
+import RecordList from "./RecordList.vue";
 
 interface IRecord {
   inputValue: string;
@@ -30,10 +30,15 @@ function setSelectValue(event: any) {
 }
 
 function createRecord() {
-  const searchElement = recordList.value.find((arr) => arr.selectValue === selectValue.value);
+  const searchElement = recordList.value.find(
+    (arr) => arr.selectValue === selectValue.value,
+  );
   if (selectValue.value == searchElement?.selectValue) {
     for (let i = 0; i < recordList.value.length; i++) {
-      if (selectValue.value == recordList.value[i].selectValue && inputValue.value !== "") {
+      if (
+        selectValue.value == recordList.value[i].selectValue &&
+        inputValue.value !== ""
+      ) {
         recordList.value[i].inputValue = inputValue.value;
       }
     }
@@ -49,7 +54,9 @@ function createRecord() {
 }
 
 function deleteRecord(time: string) {
-  recordList.value = recordList.value.filter((record) => record.selectValue !== time);
+  recordList.value = recordList.value.filter(
+    (record) => record.selectValue !== time,
+  );
   const realTime = Number(time.slice(0, 2));
   localStorage.removeItem(`record${realTime}`);
 }
