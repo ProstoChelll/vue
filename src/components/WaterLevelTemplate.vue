@@ -12,7 +12,13 @@ function clickActive(i: number) {
 <template>
   <div class="waterLevel">
     <p>Water:</p>
-    <div class="waterLevelImage" v-for="i in 6" :key="i" @click="clickActive(i)">
+    <div
+      id="waterLevelImage"
+      class="waterLevelImage"
+      v-for="i in 6"
+      :key="i"
+      @click="clickActive(i)"
+    >
       <waterImg :fill-color="i <= activeWater ? '#c80c90' : '#fff'" />
     </div>
   </div>
