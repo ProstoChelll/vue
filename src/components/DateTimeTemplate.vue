@@ -27,7 +27,7 @@ setInterval(time, 1000);
 </script>
 
 <template>
-  <div class="date top">
+  <div class="date">
     <div class="date__data">
       <p class="txt__date">Date:</p>
       <p class="txt__month">{{ month }}</p>
@@ -84,5 +84,22 @@ setInterval(time, 1000);
   font-size: 30px;
   line-height: 0px;
   color: #000000;
+}
+@media screen and (max-width: 637px) {
+  .date {
+    width: 200px;
+  }
+  .txt__date {
+    font-size: 24px;
+  }
+  .txt__month {
+    font-size: 29px;
+  }
+  .date__data {
+    gap: 10px;
+  }
+  .txt__time {
+    font-size: 25px;
+  }
 }
 </style>

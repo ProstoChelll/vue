@@ -30,15 +30,10 @@ function setSelectValue(event: any) {
 }
 
 function createRecord() {
-  const searchElement = recordList.value.find(
-    (arr) => arr.selectValue === selectValue.value,
-  );
+  const searchElement = recordList.value.find((arr) => arr.selectValue === selectValue.value);
   if (selectValue.value == searchElement?.selectValue) {
     for (let i = 0; i < recordList.value.length; i++) {
-      if (
-        selectValue.value == recordList.value[i].selectValue &&
-        inputValue.value !== ""
-      ) {
+      if (selectValue.value == recordList.value[i].selectValue && inputValue.value !== "") {
         recordList.value[i].inputValue = inputValue.value;
       }
     }
@@ -54,9 +49,7 @@ function createRecord() {
 }
 
 function deleteRecord(time: string) {
-  recordList.value = recordList.value.filter(
-    (record) => record.selectValue !== time,
-  );
+  recordList.value = recordList.value.filter((record) => record.selectValue !== time);
   const realTime = Number(time.slice(0, 2));
   localStorage.removeItem(`record${realTime}`);
 }
@@ -96,9 +89,18 @@ function deleteRecord(time: string) {
   justify-content: flex-start;
   align-items: center;
   width: auto;
-
   margin: 43px 0 19px 44px;
   padding: 0;
   gap: 10px;
+}
+@media screen and (max-width: 700px) {
+  .record__list {
+    width: 635px;
+  }
+}
+@media screen and (max-width: 637px) {
+  .record__list {
+    width: 435px;
+  }
 }
 </style>
