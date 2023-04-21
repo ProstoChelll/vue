@@ -18,7 +18,3 @@ p {
 .top {
   margin-top: 48px;
 }
-textarea:focus,
-input:focus {
-  outline: none;
-}
